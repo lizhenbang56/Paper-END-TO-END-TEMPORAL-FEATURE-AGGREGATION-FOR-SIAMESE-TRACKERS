@@ -13,10 +13,10 @@
 % Title.
 %\title{LEARNING ROBUST FEATURES FOR SIAMESE TRACKERS}
 \title{END-TO-END TEMPORAL FEATURE AGGREGATION FOR SIAMESE TRACKERS}
-\name{Zhenbang Li$^{a,c}$, Qiang Wang$^{a,c}$, Jin Gao$^a$, Bing Li$^{a,*}$, Weiming Hu$^{a,b,c}$ \thanks{*Corresponding author.}\\
+\name{Zhenbang Li$^{a,c}$, Qiang Wang$^{a,c}$, Jin Gao$^{a}$, Bing Li$^{a,*}$, Weiming Hu$^{a,b,c}$ \thanks{*Corresponding author.}\\
 \normalsize $^a$National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences, Beijing, China\\
 	\normalsize $^b$CAS Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences, Beijing, China\\
-	\normalsize $^c$University of Chinese Academy of Sciences, Beijing, China}
+	\normalsize $^c$School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing, China}
 \address{}
 
 \begin{document}
@@ -57,8 +57,8 @@ However, all above siamese algorithms perform tracking based on features cropped
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.48\textwidth]{images/visulization.pdf}
-    \vspace{-1cm}
-    \caption{A comparison of our method with the stage-of-the-art trackers SiamMask and SiamFCv2 in challenging situations. The example frames are from the GOT-10k testing set. Our approach effectively handles poor object appearance compared to existing approaches.}
+    \vspace{-0.8cm}
+    \caption{A comparison of our method with SiamMask and SiamFCv2. The example frames are from the GOT-10k testing set. Our approach effectively handles poor object appearance compared to existing approaches.}
     \vspace{-0.5cm}
     \label{fig:visulization}
 \end{figure}
@@ -78,7 +78,7 @@ However, how to utilize the temporal information in siamese trackers has not bee
     %At the first stage, a siamese FPN equipped with a temporal aggregation module provides features of the template image and the search image. Then the feature modulation module is used to merge the features and generate proposals.
     %proposals of the object given in the first-frame bounding box. 
     %At the second stage, 
-    The proposal generation stage aims to generate proposals that are visually similar to the given template target. In this stage, we introduce a temporal aggregation module to utilize the temporal information. The refine stage aims to select the target from candidate proposals. In this stage, we insert an adversarial dropout module to learn more robust feature.    }
+    The proposal generation stage aims to generate proposals that are visually similar to the given template target. The refine stage aims to select the target from candidate proposals.}
     \label{fig:SiamTFA}
 \end{figure*}
 
@@ -281,7 +281,9 @@ The loss of SiamTFA is:
 %The RoI Aligned features are fed into the global average pooling layer followed by two sibling output layers: one that produces softmax probability estimates over two classes (foreground or background) and another layer that outputs four real-valued numbers for the foreground class. These four values encode the refined bounding-box position for the RoI.
 %We get the final tracking result as follows: The classification layer $h^{cls}$ predicts a score for a RoI, the regression layer $h^{reg}$ has shape * and predicts a 4-d vector for it.
 %The RoI with the top score is the final box.
-$$\mathcal{L} = \mathcal{L}_{cls}^{stage1} + \mathcal{L}_{cls}^{stage2} + \mathcal{L}_{reg}^{stage1}+\mathcal{L}_{reg}^{stage2} +  \lambda \mathcal{L}_{adv},$$
+\begin{equation}
+\mathcal{L} = \mathcal{L}_{cls}^{stage1} + \mathcal{L}_{cls}^{stage2} + \mathcal{L}_{reg}^{stage1}+\mathcal{L}_{reg}^{stage2} +  \lambda \mathcal{L}_{adv},
+\end{equation}
 where $\lambda$ is a hyper-parameter to balance the adversarial loss and the classification/regression loss. $\mathcal{L}_{cls}^{\cdot}$ is the cross entropy loss and $\mathcal{L}_{reg}^{\cdot}$ is the standard smooth $L1$ loss for regression. During testing, the RoI with the top classification score is selected as the predicted target.
 
 
@@ -341,7 +343,7 @@ Our tracker is implemented in Python, using PyTorch.
 \end{table}
 \begin{table}
 \centering
-\caption{Comparing the results of our approach against other approaches over the GOT-10k test set. The trackers are ranked by their average overlap (AO) scores.}
+\caption{Comparing the results of our approach against other approaches over the GOT-10k test set.}
 \begin{tabular}{l l l l}
 \bottomrule
 Method   &  $AO$   &  $SR_{0.50}$ & $SR_{0.75}$  \\
@@ -426,6 +428,12 @@ Specifically, our proposed algorithm contains two main modules, \textit{i.e.} te
 %say something about the experiment.
 Extensive experimental results show that the proposed algorithm performs favorably against the state-of-the-art algorithms.
 
+\vspace{+4.5mm}
+{\parindent0pt % disables indentation for all the text between { and }
+
+\textbf{Acknowledgements.} This work is supported by the national key R&D program of china (No. 2018AAA0102802, No. 2018AAA0102803, No. 2018AAA0102800), the NSFC-general technology collaborative Fund for basic research (Grant No. U1636218), the Natural Science Foundation of China (Grant No. 61751212, 61721004, 61972394), Beijing Natural Science Foundation (Grant No. L172051), the Key Research Program of Frontier Sciences, CAS, Grant No. QYZDJ-SSW-JSC040, and the National Natural Science Foundation of Guangdong (No. 2018B030311046).
+
+}% restore indentation
 % References should be produced using the bibtex program from suitable
 % BiBTeX files (here: strings, refs, manuals). The IEEEbib.bst bibliography
 % style file from IEEE produces unsorted bibliography list.
