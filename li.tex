@@ -13,11 +13,19 @@
 % Title.
 %\title{LEARNING ROBUST FEATURES FOR SIAMESE TRACKERS}
 \title{END-TO-END TEMPORAL FEATURE AGGREGATION FOR SIAMESE TRACKERS}
-\name{Zhenbang Li$^{a,c}$, Qiang Wang$^{a,c}$, Jin Gao$^{a}$, Bing Li$^{a,*}$, Weiming Hu$^{a,b,c}$ \thanks{*Corresponding author.}\\
-\normalsize $^a$National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences, Beijing, China\\
+\name{Zhenbang Li$^{a,c}$, Qiang Wang$^{a,c}$, Jin Gao$^a$, Bing Li$^{a,*}$, Weiming Hu$^{a,b,c}$ \thanks{*Corresponding author.}}
+
+% Single address.
+% ---------------
+% \name{Author(s) Name(s)\thanks{Thanks to XYZ agency for funding.}}
+%\address{Author Affiliation(s)}
+%
+% For example:
+% ------------
+\address{\normalsize $^a$National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences, Beijing, China\\
 	\normalsize $^b$CAS Center for Excellence in Brain Science and Intelligence Technology, Chinese Academy of Sciences, Beijing, China\\
 	\normalsize $^c$School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing, China}
-\address{}
+
 
 \begin{document}
 %\ninept
@@ -91,7 +99,7 @@ We introduce a novel siamese tracking architecture equipped with a temporal aggr
 This temporal fusion strategy enables the siamese tracker to handle poor object appearance like motion blur, occlusion, \textit{etc}.
 To achieve this, we shift the channels along the temporal dimension \cite{lin2019tsm} in the backbone of the siamese network.
 Note that features of the same object are usually not spatially aligned across frames due to video motion \cite{zhu2017flow}, so the temporal shift is only performed on the residual layers \cite{lin2019tsm} to preserve the spatial feature learning capability of the siamese tracker.
-Different from other temporal fusion methods \cite{tao2016siamese, gladh2016deep}, the proposed method is able to be trained end-to-end on larger-scale datasets.
+Different from other temporal fusion methods \cite{tao2016siamese, gladh2016deep}, the proposed method is able to be trained end-to-end on large-scale datasets.
 %The proposed temporal aggregation module is trained end-to-end in the siamese network.
 %(This module enables our module to be trained end-to-end on large-scale datasets.)
 Additionally, our temporal fusion method is easy to implement, without changing the siamese tracking architecture or using optical flow \cite{zhu2018end}.
@@ -371,16 +379,16 @@ GOT-10k is a recent large-scale high-diversity dataset consisting of over 10,000
 The GOT-10k testing set includes 180 sequences with 84 different object classes and 32 motion patterns. As performance measure, we use the average overlap (AO) scores and success rate (SR) as proposed in \cite{Huang_2019}. The AO denotes the average of overlaps between all groundtruth and estimated bounding boxes, while the SR measures the percentage of successfully tracked frames where the overlaps exceed 0.5/0.75.
 
 \textbf{Ablation Studies}
-From Table \ref{tabel:ablation} (the $1^{st}$ and $2^{nd}$ row), we see that the AO performance increases by 3.1\% by adding the temporal aggregation module.
+From Table \ref{tabel:ablation} (the $1^{st}$ and $2^{nd}$ row), we see that the AO performance increases by 1.9\% by adding the temporal aggregation module.
 This is because the temporal aggregation module improves the per-frame features by aggregating temporal information from adjacent frames.
 %The RPN stage rapidly filters out most background samples, and the RoI head adopts a fixed foreground-to-background ratio to maintain a manageable balance between foreground and background.
-From Table \ref{tabel:ablation} (the $2^{nd}$ and $3^{rd}$ row), we see that with the adversarial dropout module, the AO increases by 2.9\%.
+From Table \ref{tabel:ablation} (the $2^{nd}$ and $3^{rd}$ row), we see that with the adversarial dropout module, the AO increases by 1.6\%.
 %This is because the proposed motion model can effectively predict the position distribution of the target, effectively avoiding the adverse effects of distractors. 
 This is because the adversarial dropout module improves the discrimination power of our siamese tracking network.
 
 \textbf{Overall Performance}
 We compare our proposed method with 8 trackers, including state-of-the-arts.
-The success plot of the evaluated trackers is shown in Table \ref{table:got}.
+The performances of the evaluated trackers is shown in Table \ref{table:got}.
 Compared to other listed approaches, our approach achieves a superior AO of 0.577.
 %ECO \cite{danelljan2017eco} is a state-of-the-art DCF-based tracker, which introduces a factorized convolution operator that dramatically reduces the number of parameters in the DCF model. In contrast, our tracker is based on the powerful siamese architecture. As a result, our tracker significantly outperforms ECO with a gain of 26.1\% in terms of AO score, which suggests the effectiveness of the siamese architecture for the object tracking task.
 %SiamMask \cite{wang2019fast} is a recently proposed siamese tracker. It simultaneously trains a siamese network on three tasks, each corresponding to a different strategy to establish correspondences between the target object and candidate regions in the new frames.
@@ -431,7 +439,7 @@ Extensive experimental results show that the proposed algorithm performs favorab
 \vspace{+4.5mm}
 {\parindent0pt % disables indentation for all the text between { and }
 
-\textbf{Acknowledgements.} This work is supported by the national key R&D program of china (No. 2018AAA0102802, No. 2018AAA0102803, No. 2018AAA0102800), the NSFC-general technology collaborative Fund for basic research (Grant No. U1636218), the Natural Science Foundation of China (Grant No. 61751212, 61721004, 61972394), Beijing Natural Science Foundation (Grant No. L172051), the Key Research Program of Frontier Sciences, CAS, Grant No. QYZDJ-SSW-JSC040, and the National Natural Science Foundation of Guangdong (No. 2018B030311046).
+\textbf{Acknowledgements.} This work is supported by the national key R\&D program of china (No. 2018AAA0102802, No. 2018AAA0102803, No. 2018AAA0102800), the NSFC-general technology collaborative Fund for basic research (Grant No. U1636218), the Natural Science Foundation of China (Grant No. 61751212, 61721004, 61972394), Beijing Natural Science Foundation (Grant No. L172051), the Key Research Program of Frontier Sciences, CAS, Grant No. QYZDJ-SSW-JSC040, and the National Natural Science Foundation of Guangdong (No. 2018B030311046).
 
 }% restore indentation
 % References should be produced using the bibtex program from suitable
